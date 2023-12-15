@@ -1,0 +1,79 @@
+---
+title: "EDA Analysis of Chicks Dataset in RStudio"
+author: Akanksha Alishetty
+date: 2023-12-15
+image: "ExploratoryDataAnalysis.png"
+theme: litera 
+---
+
+## A Data-Driven Approach to Chick Development Using R
+
+For this analysis, we will use the `ChickWeight` dataset available in R. This dataset contains the weights of chicks on different diets over time, making it a great choice for exploring growth patterns and diet effects. The analysis will involve visualizing weight trends and comparing diets.
+
+Step 1: Installing and Loading Packages
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+Step 2: Loading the Dataset
+
+```{r}
+data("ChickWeight")
+```
+
+Step 3: Understanding the Dataset
+
+The `ChickWeight` dataset contains weights of chicks, measured at different times, with each chick given a specific diet type.
+
+```{r}
+str(ChickWeight)
+summary(ChickWeight)
+```
+
+Step 4: Data Visualization
+
+a. Growth Curve for Each Chick
+
+We will plot the weight of each chick over time to observe the growth patterns.
+
+```{r}
+ggplot(ChickWeight, aes(x = Time, y = weight, group = Chick, color = as.factor(Diet))) + 
+  geom_line() + 
+  ggtitle("Growth Curve for Each Chick") + 
+  xlab("Time (days)") + 
+  ylab("Weight (grams)") +
+  labs(color = "Diet")
+```
+
+b. Average Weight by Diet
+
+Next, we'll look at the average weight of chicks on each diet.
+
+```{r}
+ChickWeight %>%
+  group_by(Diet) %>%
+  summarize(AverageWeight = mean(weight)) %>%
+  ggplot(aes(x = as.factor(Diet), y = AverageWeight, fill = as.factor(Diet))) +
+  geom_bar(stat = "identity") +
+  ggtitle("Average Weight by Diet") +
+  xlab("Diet Type") +
+  ylab("Average Weight (grams)")
+```
+
+c. Boxplot of Weight by Diet at Day 21
+
+This will help us see the distribution of weights across different diets at a specific time point.
+
+```{r}
+ChickWeight %>% 
+  filter(Time == 21) %>%
+  ggplot(aes(x = as.factor(Diet), y = weight, fill = as.factor(Diet))) +
+  geom_boxplot() +
+  ggtitle("Weight Distribution by Diet at Day 21") +
+  xlab("Diet Type") +
+  ylab("Weight (grams)")
+```
+
+EDA in the ChickWeight dataset uncovers growth patterns under different diets over time, ensures data quality by identifying missing values and outliers, explores variable relationships crucial for statistical modeling, and employs visualizations to facilitate effective communication and practical decision-making in fields such as poultry science and nutrition.

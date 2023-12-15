@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "blogs/index.html",
+    "href": "blogs/index.html",
+    "title": "EDA Analysis of Chicks Dataset in RStudio",
+    "section": "",
+    "text": "For this analysis, we will use the ChickWeight dataset available in R. This dataset contains the weights of chicks on different diets over time, making it a great choice for exploring growth patterns and diet effects. The analysis will involve visualizing weight trends and comparing diets.\nStep 1: Installing and Loading Packages\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nStep 2: Loading the Dataset\n\ndata(\"ChickWeight\")\n\nStep 3: Understanding the Dataset\nThe ChickWeight dataset contains weights of chicks, measured at different times, with each chick given a specific diet type.\n\nstr(ChickWeight)\n\nClasses 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':  578 obs. of  4 variables:\n $ weight: num  42 51 59 64 76 93 106 125 149 171 ...\n $ Time  : num  0 2 4 6 8 10 12 14 16 18 ...\n $ Chick : Ord.factor w/ 50 levels \"18\"&lt;\"16\"&lt;\"15\"&lt;..: 15 15 15 15 15 15 15 15 15 15 ...\n $ Diet  : Factor w/ 4 levels \"1\",\"2\",\"3\",\"4\": 1 1 1 1 1 1 1 1 1 1 ...\n - attr(*, \"formula\")=Class 'formula'  language weight ~ Time | Chick\n  .. ..- attr(*, \".Environment\")=&lt;environment: R_EmptyEnv&gt; \n - attr(*, \"outer\")=Class 'formula'  language ~Diet\n  .. ..- attr(*, \".Environment\")=&lt;environment: R_EmptyEnv&gt; \n - attr(*, \"labels\")=List of 2\n  ..$ x: chr \"Time\"\n  ..$ y: chr \"Body weight\"\n - attr(*, \"units\")=List of 2\n  ..$ x: chr \"(days)\"\n  ..$ y: chr \"(gm)\"\n\nsummary(ChickWeight)\n\n     weight           Time           Chick     Diet   \n Min.   : 35.0   Min.   : 0.00   13     : 12   1:220  \n 1st Qu.: 63.0   1st Qu.: 4.00   9      : 12   2:120  \n Median :103.0   Median :10.00   20     : 12   3:120  \n Mean   :121.8   Mean   :10.72   10     : 12   4:118  \n 3rd Qu.:163.8   3rd Qu.:16.00   17     : 12          \n Max.   :373.0   Max.   :21.00   19     : 12          \n                                 (Other):506          \n\n\nStep 4: Data Visualization\n\nGrowth Curve for Each Chick\n\nWe will plot the weight of each chick over time to observe the growth patterns.\n\nggplot(ChickWeight, aes(x = Time, y = weight, group = Chick, color = as.factor(Diet))) + \n  geom_line() + \n  ggtitle(\"Growth Curve for Each Chick\") + \n  xlab(\"Time (days)\") + \n  ylab(\"Weight (grams)\") +\n  labs(color = \"Diet\")\n\n\n\n\n\nAverage Weight by Diet\n\nNext, we’ll look at the average weight of chicks on each diet.\n\nChickWeight %&gt;%\n  group_by(Diet) %&gt;%\n  summarize(AverageWeight = mean(weight)) %&gt;%\n  ggplot(aes(x = as.factor(Diet), y = AverageWeight, fill = as.factor(Diet))) +\n  geom_bar(stat = \"identity\") +\n  ggtitle(\"Average Weight by Diet\") +\n  xlab(\"Diet Type\") +\n  ylab(\"Average Weight (grams)\")\n\n\n\n\n\nBoxplot of Weight by Diet at Day 21\n\nThis will help us see the distribution of weights across different diets at a specific time point.\n\nChickWeight %&gt;% \n  filter(Time == 21) %&gt;%\n  ggplot(aes(x = as.factor(Diet), y = weight, fill = as.factor(Diet))) +\n  geom_boxplot() +\n  ggtitle(\"Weight Distribution by Diet at Day 21\") +\n  xlab(\"Diet Type\") +\n  ylab(\"Weight (grams)\")\n\n\n\n\nEDA in the ChickWeight dataset uncovers growth patterns under different diets over time, ensures data quality by identifying missing values and outliers, explores variable relationships crucial for statistical modeling, and employs visualizations to facilitate effective communication and practical decision-making in fields such as poultry science and nutrition."
+  },
+  {
+    "objectID": "blogs/index.html#a-data-driven-approach-to-chick-development-using-r",
+    "href": "blogs/index.html#a-data-driven-approach-to-chick-development-using-r",
+    "title": "EDA Analysis of Chicks Dataset in RStudio",
+    "section": "",
+    "text": "For this analysis, we will use the ChickWeight dataset available in R. This dataset contains the weights of chicks on different diets over time, making it a great choice for exploring growth patterns and diet effects. The analysis will involve visualizing weight trends and comparing diets.\nStep 1: Installing and Loading Packages\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nStep 2: Loading the Dataset\n\ndata(\"ChickWeight\")\n\nStep 3: Understanding the Dataset\nThe ChickWeight dataset contains weights of chicks, measured at different times, with each chick given a specific diet type.\n\nstr(ChickWeight)\n\nClasses 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':  578 obs. of  4 variables:\n $ weight: num  42 51 59 64 76 93 106 125 149 171 ...\n $ Time  : num  0 2 4 6 8 10 12 14 16 18 ...\n $ Chick : Ord.factor w/ 50 levels \"18\"&lt;\"16\"&lt;\"15\"&lt;..: 15 15 15 15 15 15 15 15 15 15 ...\n $ Diet  : Factor w/ 4 levels \"1\",\"2\",\"3\",\"4\": 1 1 1 1 1 1 1 1 1 1 ...\n - attr(*, \"formula\")=Class 'formula'  language weight ~ Time | Chick\n  .. ..- attr(*, \".Environment\")=&lt;environment: R_EmptyEnv&gt; \n - attr(*, \"outer\")=Class 'formula'  language ~Diet\n  .. ..- attr(*, \".Environment\")=&lt;environment: R_EmptyEnv&gt; \n - attr(*, \"labels\")=List of 2\n  ..$ x: chr \"Time\"\n  ..$ y: chr \"Body weight\"\n - attr(*, \"units\")=List of 2\n  ..$ x: chr \"(days)\"\n  ..$ y: chr \"(gm)\"\n\nsummary(ChickWeight)\n\n     weight           Time           Chick     Diet   \n Min.   : 35.0   Min.   : 0.00   13     : 12   1:220  \n 1st Qu.: 63.0   1st Qu.: 4.00   9      : 12   2:120  \n Median :103.0   Median :10.00   20     : 12   3:120  \n Mean   :121.8   Mean   :10.72   10     : 12   4:118  \n 3rd Qu.:163.8   3rd Qu.:16.00   17     : 12          \n Max.   :373.0   Max.   :21.00   19     : 12          \n                                 (Other):506          \n\n\nStep 4: Data Visualization\n\nGrowth Curve for Each Chick\n\nWe will plot the weight of each chick over time to observe the growth patterns.\n\nggplot(ChickWeight, aes(x = Time, y = weight, group = Chick, color = as.factor(Diet))) + \n  geom_line() + \n  ggtitle(\"Growth Curve for Each Chick\") + \n  xlab(\"Time (days)\") + \n  ylab(\"Weight (grams)\") +\n  labs(color = \"Diet\")\n\n\n\n\n\nAverage Weight by Diet\n\nNext, we’ll look at the average weight of chicks on each diet.\n\nChickWeight %&gt;%\n  group_by(Diet) %&gt;%\n  summarize(AverageWeight = mean(weight)) %&gt;%\n  ggplot(aes(x = as.factor(Diet), y = AverageWeight, fill = as.factor(Diet))) +\n  geom_bar(stat = \"identity\") +\n  ggtitle(\"Average Weight by Diet\") +\n  xlab(\"Diet Type\") +\n  ylab(\"Average Weight (grams)\")\n\n\n\n\n\nBoxplot of Weight by Diet at Day 21\n\nThis will help us see the distribution of weights across different diets at a specific time point.\n\nChickWeight %&gt;% \n  filter(Time == 21) %&gt;%\n  ggplot(aes(x = as.factor(Diet), y = weight, fill = as.factor(Diet))) +\n  geom_boxplot() +\n  ggtitle(\"Weight Distribution by Diet at Day 21\") +\n  xlab(\"Diet Type\") +\n  ylab(\"Weight (grams)\")\n\n\n\n\nEDA in the ChickWeight dataset uncovers growth patterns under different diets over time, ensures data quality by identifying missing values and outliers, explores variable relationships crucial for statistical modeling, and employs visualizations to facilitate effective communication and practical decision-making in fields such as poultry science and nutrition."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "EDA Analysis of Chicks Dataset in RStudio\n\n\n\n\n\n\n\n\n\n\n\n\nDec 15, 2023\n\n\nAkanksha Alishetty\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Akanksha Alishetty",
+    "section": "",
+    "text": "Akanksha Alishetty is currently pursuing her Masters of Science in Advanced Data Analytics at the University of North Texas.\nExperience using Gitbash and GitHub for version control and branching strategies. Designed and developed API platforms to connect disparate backend systems, supporting them through their entire lifecycle. Configured staging and production environments for Apigee Edge and monitored API performance.\nProficient in APIGEE, GitHub, Jenkins, Hadoop, Spark, Tableau, Python, Java, HTML, C++ and PHP.\n \n    \n  \n    \n     Email\n  \n  \n    \n     GitHub\n  \n  \n    \n     Resume"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  }
+]

@@ -1,0 +1,28 @@
+---
+title: "Akanksha Alishetty"
+image: Akanksha.png
+resources: Akanksha Resume.pdf
+about: 
+  template: marquee
+  image-shape: round
+  image-width: 14em
+  links:
+  - text: Email
+    icon: envelope
+    href: mailto:akankshaalishetty@my.unt.edu
+  - text: GitHub
+    icon: github
+    href: https://github.com/Akanksha6778
+  - text: Resume
+    icon: file-text
+    href: Akanksha Resume.pdf
+  id: ppc
+---
+
+::: {#ppc}
+Akanksha Alishetty is currently pursuing her Masters of Science in Advanced Data Analytics at the University of North Texas.
+
+Experience using Gitbash and GitHub for version control and branching strategies. Designed and developed API platforms to connect disparate backend systems, supporting them through their entire lifecycle. Configured staging and production environments for Apigee Edge and monitored API performance. 
+
+Proficient in APIGEE, GitHub, Jenkins, Hadoop, Spark, Tableau, Python, Java, HTML, C++ and PHP.
+:::
